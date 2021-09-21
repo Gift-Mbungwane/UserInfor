@@ -2,7 +2,6 @@ import { StyleSheet } from "react-native";
 
 export const globalStyles = StyleSheet.create({
   container: {
-    padding: 24,
     flex: 1,
     alignItems: "center",
     justifyContent: "center",
@@ -32,6 +31,7 @@ export const globalStyles = StyleSheet.create({
     width: 310,
     height: 60,
     borderWidth: 1,
+    borderRadius: 10,
   },
   text: {
     backgroundColor: "#E8EAED",
@@ -39,6 +39,8 @@ export const globalStyles = StyleSheet.create({
     justifyContent: "center",
   },
   button: {
-    borderWidth: 1,
+    backgroundColor: "green",
+    borderRadius: 10,
+    color: "green",
   },
 });

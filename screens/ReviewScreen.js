@@ -43,8 +43,8 @@ export default function ReviewScreen({ navigation }) {
   };
 
   return (
-    <ScrollView>
-      <View style={globalStyles.container}>
+    <View style={globalStyles.container}>
+      <ScrollView>
         <KeyboardAvoidingView
           behavior={Platform.OS === "ios" ? "padding" : "height"}
         >
@@ -137,7 +137,7 @@ export default function ReviewScreen({ navigation }) {
             </KeyboardAvoidingView>
           </View>
         </KeyboardAvoidingView>
-      </View>
-    </ScrollView>
+      </ScrollView>
+    </View>
   );
 }
