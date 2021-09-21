@@ -9,6 +9,7 @@ export const globalStyles = StyleSheet.create({
     borderRadius: 6,
   },
   titleText: {
+    padding: 24,
     fontFamily: "nunito-bold",
     fontSize: 18,
     color: "#333",
@@ -18,6 +19,8 @@ export const globalStyles = StyleSheet.create({
     height: 200,
     borderRadius: 200,
     borderWidth: 2,
+    justifyContent: "center",
+    alignSelf: "center",
   },
   paragraph: {
     marginVertical: 8,

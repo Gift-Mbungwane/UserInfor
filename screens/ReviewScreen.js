@@ -11,15 +11,9 @@ import {
 import { globalStyles } from "../styles/global";
 import { ScrollView } from "react-native-gesture-handler";
 import * as ImagePicker from "expo-image-picker";
+import globalUserModel from "./UserModel";
 
 export default function ReviewScreen({ navigation }) {
-  const [name, setName] = useState();
-  const [surname, setSurname] = useState();
-  const [email, setEmail] = useState();
-  const [address, setAddress] = useState();
-  const [phone, setPhone] = useState();
-  const [image, setImage] = useState(null);
-
   useEffect(() => {
     (async () => {
       if (Platform.OS !== "web") {
@@ -30,7 +24,7 @@ export default function ReviewScreen({ navigation }) {
         }
       }
     })();
-  }, [navigation]);
+  }, []);
 
   const pickImage = async () => {
     let result = await ImagePicker.launchImageLibraryAsync({
@@ -43,7 +37,8 @@ export default function ReviewScreen({ navigation }) {
     console.log(result);
 
     if (!result.cancelled) {
-      setImage(result.uri);
+      globalUserModel.setPhoto(result.uri);
+      // setImage(result.uri);
     }
   };
 
@@ -69,13 +64,15 @@ export default function ReviewScreen({ navigation }) {
                   title="Pick an image from camera roll"
                   onPress={pickImage}
                 />
-                {image && (
+                {globalUserModel.photo && (
                   <Image
                     multiline
                     b={globalStyles.input}
-                    source={{ uri: image }}
-                    value={{ uri: image }}
-                    onChangeText={(result) => setImage(result.uri)}
+                    source={{ uri: globalUserModel.photo }}
+                    value={{ uri: globalUserModel.photo }}
+                    onChangeText={(result) =>
+                      globalUserModel.setPhoto(result.uri)
+                    }
                     style={{ width: 200, height: 200 }}
                   />
                 )}
@@ -85,32 +82,32 @@ export default function ReviewScreen({ navigation }) {
                 multiline
                 style={globalStyles.input}
                 placeholder="name"
-                onChangeText={(val) => setName(val)}
-                value={name}
+                onChangeText={(name) => globalUserModel.setName(name)}
+                value={globalUserModel.userName}
               />
               <Text>Surname:</Text>
               <TextInput
                 multiline
                 style={globalStyles.input}
                 placeholder="Surname"
-                onChangeText={(val) => setSurname(val)}
-                value={surname}
+                onChangeText={(surname) => globalUserModel.setSurname(surname)}
+                value={globalUserModel.surName}
               />
               <Text>Email:</Text>
               <TextInput
                 multiline
                 style={globalStyles.input}
                 placeholder="example.exam@gmail.com"
-                onChangeText={(val) => setEmail(val)}
-                value={email}
+                onChangeText={(email) => globalUserModel.setEmail(email)}
+                value={globalUserModel.email}
               />
               <Text>Cellphone:</Text>
               <TextInput
                 multiline
                 style={globalStyles.input}
                 placeholder="Phone no.: (+27) 0"
-                onChangeText={(val) => setPhone(val)}
-                value={phone}
+                onChangeText={(mobile) => globalUserModel.setMobile(mobile)}
+                value={globalUserModel.mobile}
                 keyboardType="numeric"
               />
               <Text style={globalStyles.text}>Address:</Text>
@@ -118,20 +115,20 @@ export default function ReviewScreen({ navigation }) {
                 multiline
                 style={globalStyles.input}
                 placeholder="44 lactose Str. Avennue"
-                onChangeText={(val) => setAddress(val)}
-                value={address}
+                onChangeText={(address) => globalUserModel.setAddress(address)}
+                value={globalUserModel.address}
               />
               <Button
                 title="submit"
                 style={globalStyles.button}
-                onPress={() => {
+                onPress={async () => {
                   navigation.navigate("DetailsScreen", {
-                    image: image,
-                    name: name,
-                    surname: surname,
-                    email: email,
-                    phone: phone,
-                    address: address,
+                    photo: globalUserModel.photo,
+                    name: globalUserModel.userName,
+                    surname: globalUserModel.surName,
+                    email: globalUserModel.email,
+                    mobile: globalUserModel.mobile,
+                    address: globalUserModel.address,
                   });
                 }}
               >
